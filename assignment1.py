@@ -198,7 +198,7 @@ class GameManager():
                             self.start_game = True
                             s_time = pygame.time.get_ticks()
                     elif self.in_game == True and self.game_over == False and event.button == 1:
-                        if self.is_character_hit(pygame.mouse.get_pos(), self.hole_positions[frame_num]) and num > 0:
+                        if self.is_character_hit(pygame.mouse.get_pos(), self.hole_positions[frame_num]) and num > 0 and num < 3:
                             num = 3
                             is_down = False
                             interval = 0
