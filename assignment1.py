@@ -34,11 +34,11 @@ class Character:
 class GameManager():
     def __init__(self):
         # Variables for the window game
-        # self.SCREEN_WIDTH = 1280
-        # self.SCREEN_HEIGHT = 720
-        self.SCREEN_WIDTH = 993
-        self.SCREEN_HEIGHT = 477
-        self.FPS = 60
+        self.SCREEN_WIDTH = 1280
+        self.SCREEN_HEIGHT = 720
+        #self.SCREEN_WIDTH = 993
+        #self.SCREEN_HEIGHT = 477
+        self.FPS = 120
         self.CHARACTER_WIDTH = 80
         self.CHARACTER_HEIGHT = 90
         self.FONT_TOP_MARGIN = 30
@@ -63,15 +63,16 @@ class GameManager():
 
         # Possible hole positions
         self.hole_positions = [
-            (105, 0),
-            (105, 150),
-            (105, 300),
-            (420, 0),
-            (420, 150),
-            (420, 300),
-            (730, 0),
-            (730, 150),
-            (730, 300)
+            (145, 420),
+            (365, 420),
+            (615, 420),
+            (855, 420),
+            (1090, 420),
+            (80, 540),
+            (325, 540),
+            (560, 540),
+            (815, 540),
+            (1055, 540),
         ]
 
         # Initialize screen
@@ -122,8 +123,8 @@ class GameManager():
     # Update the game states, re-calculate the player's score, miss, level
 
     def update(self, s_time):
-        self.screen.blit(pygame.image.load(
-            './images/background2.png'), (860, 0))
+        #self.screen.blit(pygame.image.load(
+        #    './images/background2.png'), (860, 0))
         # Update time
         current_time_string = "TIME: " + \
             str(int(self.time_left - (pygame.time.get_ticks() - s_time)/1000))
@@ -329,7 +330,7 @@ class GameManager():
                     num = 0
                     is_down = False
                     interval = 0.5
-                    frame_num = random.randint(0, 8)
+                    frame_num = random.randint(0, 9)
 
                 # Reset character
                 mil = fpsClock.tick(self.FPS)
