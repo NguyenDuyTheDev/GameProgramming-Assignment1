@@ -5,13 +5,13 @@ import random
 
 class BackGround:
     def __init__(self):
-        self.img_background = pygame.image.load('./images/begin2.png')
+        self.img_background = pygame.image.load('./images/begin1.jpg')
 
     def start(self):
         self.img_background = pygame.image.load('./images/background.png')
 
     def finished(self):
-        self.img_background = pygame.image.load('./images/finish.png')
+        self.img_background = pygame.image.load('./images/finish.jpg')
 
 
 class Character:
@@ -36,8 +36,8 @@ class GameManager():
         # Variables for the window game
         self.SCREEN_WIDTH = 1280
         self.SCREEN_HEIGHT = 720
-        #self.SCREEN_WIDTH = 993
-        #self.SCREEN_HEIGHT = 477
+        # self.SCREEN_WIDTH = 993
+        # self.SCREEN_HEIGHT = 477
         self.FPS = 120
         self.CHARACTER_WIDTH = 80
         self.CHARACTER_HEIGHT = 90
@@ -46,7 +46,7 @@ class GameManager():
         self.GAME_TITLE = "Assignment1"
 
         # Variables for the main game
-        self.time_left = 61
+        self.time_left = 5
         self.count_down = 5
         self.count_down_time = self.count_down
         self.score = 0
@@ -58,21 +58,22 @@ class GameManager():
         self.game_over = False
 
         # Font object for displaying text
-        self.font_obj = pygame.font.SysFont('comicsansms', 24)
-        self.font_coor = pygame.font.SysFont('comicsansms', 12)
+        self.font_obj = pygame.font.SysFont('comicsansms', 26)
+        self.font_obj_finish = pygame.font.SysFont('comicsansms', 44)
+        self.font_coor = pygame.font.SysFont('comicsansms', 14)
 
         # Possible hole positions
         self.hole_positions = [
-            (145, 420),
-            (365, 420),
-            (615, 420),
-            (855, 420),
+            (150, 420),
+            (370, 420),
+            (620, 420),
+            (860, 420),
             (1090, 420),
-            (80, 540),
-            (325, 540),
-            (560, 540),
-            (815, 540),
-            (1055, 540),
+            (90, 540),
+            (330, 540),
+            (570, 540),
+            (820, 540),
+            (1060, 540),
         ]
 
         # Initialize screen
@@ -123,15 +124,15 @@ class GameManager():
     # Update the game states, re-calculate the player's score, miss, level
 
     def update(self, s_time):
-        #self.screen.blit(pygame.image.load(
-        #    './images/background2.png'), (860, 0))
+        self.screen.blit(pygame.image.load(
+            './images/background1.png'), (1010, 0))
         # Update time
         current_time_string = "TIME: " + \
             str(int(self.time_left - (pygame.time.get_ticks() - s_time)/1000))
         time_text = self.font_obj.render(
             current_time_string, True, (255, 255, 255))
         time_text_pos = time_text.get_rect()
-        time_text_pos.center = (self.SCREEN_WIDTH - 70, self.FONT_TOP_MARGIN)
+        time_text_pos.center = (self.SCREEN_WIDTH - 80, self.FONT_TOP_MARGIN)
         self.screen.blit(time_text, time_text_pos)
         # Update the player's score
         current_score_string = "SCORE: " + str(self.score)
@@ -139,7 +140,7 @@ class GameManager():
             current_score_string, True, (255, 255, 255))
         score_text_pos = score_text.get_rect()
         score_text_pos.center = (
-            self.SCREEN_WIDTH - 70, self.FONT_TOP_MARGIN * 3)
+            self.SCREEN_WIDTH - 80, self.FONT_TOP_MARGIN * 3)
         self.screen.blit(score_text, score_text_pos)
         # Update the player's miss
         current_miss_string = "MISS: " + str(self.miss)
@@ -147,7 +148,7 @@ class GameManager():
             current_miss_string, True, (255, 255, 255))
         miss_text_pos = miss_text.get_rect()
         miss_text_pos.center = (
-            self.SCREEN_WIDTH - 70, self.FONT_TOP_MARGIN * 4)
+            self.SCREEN_WIDTH - 80, self.FONT_TOP_MARGIN * 4)
         self.screen.blit(miss_text, miss_text_pos)
         # Update the player's level
         current_level_string = "LEVEL: " + str(self.level)
@@ -155,7 +156,7 @@ class GameManager():
             current_level_string, True, (255, 255, 255))
         level_text_pos = level_text.get_rect()
         level_text_pos.center = (
-            self.SCREEN_WIDTH - 70, self.FONT_TOP_MARGIN * 5)
+            self.SCREEN_WIDTH - 80, self.FONT_TOP_MARGIN * 5)
         self.screen.blit(level_text, level_text_pos)
 
     # Start the game's main loop
@@ -173,12 +174,11 @@ class GameManager():
         fpsClock = pygame.time.Clock()
 
         # Create rect of the play_box and play_again components
-        play_box = pygame.Rect(0, 0, 170, 60)
+        play_box = pygame.Rect(570, 330, 270, 140)
         play_again = []
         play_again.append(pygame.image.load('./images/playagain1.png'))
         play_again.append(pygame.image.load('./images/playagain2.png'))
-        play_again_rect = pygame.Rect(400, 355, 187, 57)
-        play_box.move_ip(410, 360)
+        play_again_rect = pygame.Rect(550, 520, 187, 57)
 
         # To make the function called just once
         hover = 0
@@ -240,21 +240,21 @@ class GameManager():
                     if hover == 0:
                         pygame.mouse.set_cursor(pygame.cursors.broken_x)
                         self.bg.img_background = pygame.image.load(
-                            './images/begin4.png')
+                            './images/begin2.jpg')
                         self.screen.blit(self.bg.img_background, (0, 0))
                         hover = 1
                 else:
                     if hover == 1:
                         pygame.mouse.set_cursor(pygame.cursors.arrow)
                         self.bg.img_background = pygame.image.load(
-                            './images/begin2.png')
+                            './images/begin1.jpg')
                         self.screen.blit(self.bg.img_background, (0, 0))
                         hover = 0
 
             elif self.in_game == False:
                 self.bg.start()
                 self.screen.blit(self.bg.img_background, (0, 0))
-                font_count_down = pygame.font.SysFont('comicsansms', 60)
+                font_count_down = pygame.font.SysFont('comicsansms', 72)
                 # Countdown
                 self.count_down_time = int(
                     self.count_down - (pygame.time.get_ticks() - s_time)/1000)
@@ -278,17 +278,17 @@ class GameManager():
                     self.screen.blit(self.bg.img_background, (0, 0))
                     # Update the final score
                     final_score_string = "SCORE: " + str(self.score)
-                    final_score_text = self.font_obj.render(
+                    final_score_text = self.font_obj_finish.render(
                         final_score_string, True, (255, 255, 255))
                     final_score_text_pos = final_score_text.get_rect()
-                    final_score_text_pos.center = (520, 210)
+                    final_score_text_pos.center = (640, 240)
                     self.screen.blit(final_score_text, final_score_text_pos)
                     # Update the final miss
                     final_miss_string = "MISS: " + str(self.miss)
-                    final_miss_text = self.font_obj.render(
+                    final_miss_text = self.font_obj_finish.render(
                         final_miss_string, True, (255, 255, 255))
                     final_miss_text_pos = final_miss_text.get_rect()
-                    final_miss_text_pos.center = (520, 250)
+                    final_miss_text_pos.center = (640, 320)
                     self.screen.blit(final_miss_text, final_miss_text_pos)
                     # Update the final rate
                     if self.score + self.miss == 0:
@@ -299,24 +299,24 @@ class GameManager():
                         rate = round(
                             self.score/(self.score + self.miss) * 100, 2)
                     final_rate_string = "RATE: " + str(rate) + ' %'
-                    final_rate_text = self.font_obj.render(
+                    final_rate_text = self.font_obj_finish.render(
                         final_rate_string, True, (255, 255, 255))
                     final_rate_text_pos = final_rate_text.get_rect()
-                    final_rate_text_pos.center = (520, 290)
+                    final_rate_text_pos.center = (640, 400)
                     self.screen.blit(final_rate_text, final_rate_text_pos)
-                    self.screen.blit(play_again[0], (400, 355))
+                    self.screen.blit(play_again[0], (550, 520))
 
                     finish = 1
                 elif finish == 1:
                     if play_again_rect.collidepoint(pygame.mouse.get_pos()):
                         if finish_hover == 0:
                             pygame.mouse.set_cursor(pygame.cursors.broken_x)
-                            self.screen.blit(play_again[1], (400, 355))
+                            self.screen.blit(play_again[1], (550, 520))
                             finish_hover = 1
                     else:
                         if finish_hover == 1:
                             pygame.mouse.set_cursor(pygame.cursors.arrow)
-                            self.screen.blit(play_again[0], (400, 355))
+                            self.screen.blit(play_again[0], (550, 520))
                             finish_hover = 0
             else:
                 if num > 5:
@@ -371,11 +371,13 @@ class GameManager():
                     self.update(s_time)
 
                 # Set coordinates counter
+                self.screen.blit(pygame.image.load(
+                    './images/background2.png'), (1120, 670))
                 coordinates_x, coordinates_y = pygame.mouse.get_pos()
                 textCoor = self.font_coor.render(
                     'x: ' + str(coordinates_x) + ', y: ' + str(coordinates_y), True, (255, 255, 255))
                 textCoor_pos = textCoor.get_rect()
-                textCoor_pos.centerx = self.SCREEN_WIDTH - 50
+                textCoor_pos.centerx = self.SCREEN_WIDTH - 70
                 textCoor_pos.centery = self.SCREEN_HEIGHT - 20
                 self.screen.blit(textCoor, textCoor_pos)
 
@@ -384,13 +386,13 @@ class GameManager():
 
 class SoundEffect:
     def __init__(self):
-        self.mainTrack = pygame.mixer.music.load("music/themesong.wav")
+        # self.mainTrack = pygame.mixer.music.load("music/themesong.wav")
         self.countDownSound = pygame.mixer.Sound('sounds/count.wav')
         self.hammerSound = pygame.mixer.Sound('sounds/hammering.wav')
         self.popSound = pygame.mixer.Sound("sounds/pop.wav")
         self.missSound = pygame.mixer.Sound("sounds/miss.wav")
         self.levelSound = pygame.mixer.Sound("sounds/point.wav")
-        pygame.mixer.music.play(-1)
+        # pygame.mixer.music.play(-1)
 
     def playCountDown(self):
         self.countDownSound.play()
