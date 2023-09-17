@@ -46,8 +46,8 @@ class GameManager():
         self.GAME_TITLE = "Assignment1"
 
         # Variables for the main game
-        self.time_left = 5
-        self.count_down = 5
+        self.time_left = 61
+        self.count_down = 6
         self.count_down_time = self.count_down
         self.score = 0
         self.miss = 0
@@ -197,6 +197,13 @@ class GameManager():
                     if self.start_game == False and event.button == 1:
                         if play_box.collidepoint(pygame.mouse.get_pos()):
                             self.start_game = True
+                            # Music
+                            pygame.mixer.music.unload()
+                            pygame.mixer.music.load("music/UndeadRising.mp3")
+                            pygame.mixer.music.play(-1)
+                            pygame.mixer.music.set_volume(0.2)
+
+                            # Start time
                             s_time = pygame.time.get_ticks()
                     elif self.in_game == True and self.game_over == False and event.button == 1:
                         if self.is_character_hit(pygame.mouse.get_pos(), self.hole_positions[frame_num]) and num > 0 and num < 3:
@@ -231,6 +238,12 @@ class GameManager():
                             frame_num = 0
                             finish = 0
                             finish_hover = 0
+
+                            # Music
+                            pygame.mixer.music.unload()
+                            pygame.mixer.music.load("music/UndeadRising.mp3")
+                            pygame.mixer.music.play(-1)
+                            pygame.mixer.music.set_volume(0.2)
 
                             # Start time
                             s_time = pygame.time.get_ticks()
@@ -361,13 +374,15 @@ class GameManager():
                     self.game_over = True
                     # Set the theme sound
                     pygame.mixer.music.unload()
-                    pygame.mixer.music.load("music/themesong.wav")
+                    pygame.mixer.music.load("music/themesong.mp3")
                     pygame.mixer.music.play(-1)
+                    pygame.mixer.music.set_volume(0.1)
                 else:
                     if (int(self.time_left - (pygame.time.get_ticks() - s_time - 5)/1000) == 10):
                         pygame.mixer.music.unload()
                         pygame.mixer.music.load("sounds/count_down.wav")
                         pygame.mixer.music.play(-1)
+                        pygame.mixer.music.set_volume(0.1)
                     self.update(s_time)
 
                 # Set coordinates counter
@@ -386,40 +401,46 @@ class GameManager():
 
 class SoundEffect:
     def __init__(self):
-        # self.mainTrack = pygame.mixer.music.load("music/themesong.wav")
+        self.mainTrack = pygame.mixer.music.load("music/themesong.mp3")
         self.countDownSound = pygame.mixer.Sound('sounds/count.wav')
         self.hammerSound = pygame.mixer.Sound('sounds/hammering.wav')
         self.popSound = pygame.mixer.Sound("sounds/pop.wav")
         self.missSound = pygame.mixer.Sound("sounds/miss.wav")
         self.levelSound = pygame.mixer.Sound("sounds/point.wav")
-        # pygame.mixer.music.play(-1)
+        pygame.mixer.music.play(-1)
+        pygame.mixer.music.set_volume(0.1)
 
     def playCountDown(self):
         self.countDownSound.play()
+        self.countDownSound.set_volume(0.2)
 
     def stopCountDown(self):
         self.countDownSound.stop()
 
     def playHammer(self):
         self.hammerSound.play()
+        self.hammerSound.set_volume(0.2)
 
     def stopHammer(self):
         self.hammerSound.stop()
 
     def playPop(self):
         self.popSound.play()
+        self.popSound.set_volume(0.2)
 
     def stopPop(self):
         self.popSound.stop()
 
     def playMiss(self):
         self.missSound.play()
+        self.missSound.set_volume(0.2)
 
     def stopMiss(self):
         self.missSound.stop()
 
     def playLevelUp(self):
         self.levelSound.play()
+        self.levelSound.set_volume(0.2)
 
     def stopLevelUp(self):
         self.levelSound.stop()
