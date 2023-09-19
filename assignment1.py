@@ -27,9 +27,9 @@ class Character:
         self.data.append(self.img_character_2.subsurface(0, 0, 80, 90))
         self.data.append(self.img_character_3.subsurface(0, 0, 80, 90))
         self.data.append(self.img_character_4.subsurface(0, 0, 80, 90))
-        #self.data.append(self.img_character_3.subsurface(0, 0, 80, 90))
-        #self.data.append(self.img_character_2.subsurface(0, 0, 80, 90))
-        #self.data.append(self.img_character_1.subsurface(0, 0, 80, 90))
+        # self.data.append(self.img_character_3.subsurface(0, 0, 80, 90))
+        # self.data.append(self.img_character_2.subsurface(0, 0, 80, 90))
+        # self.data.append(self.img_character_1.subsurface(0, 0, 80, 90))
         self.data.append(self.img_character_5.subsurface(0, 0, 80, 90))
         self.data.append(self.img_character_6.subsurface(0, 0, 80, 90))
 
@@ -107,11 +107,11 @@ class GameManager():
     # Get the new duration between the time the character pop up and down the holes
     # It's in inverse ratio to the player's current level
     def get_interval_by_level(self, initial_interval):
-        new_interval = initial_interval - self.level * 0.15
+        new_interval = initial_interval - self.level * 0.2
         if new_interval > 0:
             return new_interval
         else:
-            return 0.05
+            return 0.04
 
     # Check whether the mouse click hit the character or not
     def is_character_hit(self, mouse_position, current_hole_position):
