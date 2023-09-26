@@ -16,19 +16,22 @@ class BackGround:
 
 class Character:
     def __init__(self):
-        self.img_character_1 = pygame.image.load('./images/mole_1.png')
-        self.img_character_11 = pygame.image.load('./images/mole_11.png')
-        self.img_character_12 = pygame.image.load('./images/mole_12.png')
-        self.img_character_2 = pygame.image.load('./images/mole_2.png')
-        self.img_character_21 = pygame.image.load('./images/mole_21.png')
-        self.img_character_22 = pygame.image.load('./images/mole_22.png')
+        self.img_character_1 = pygame.image.load('./images/zom_1.png')
+        self.img_character_2 = pygame.image.load('./images/zom_2.png')
+        self.img_character_3 = pygame.image.load('./images/zom_3.png')
+        self.img_character_4 = pygame.image.load('./images/zom_4.png')
+        self.img_character_5 = pygame.image.load('./images/zom_5.png')
+        self.img_character_6 = pygame.image.load('./images/zom_6.png')
         self.data = []
-        self.data.append(self.img_character_11.subsurface(0, 0, 80, 90))
-        self.data.append(self.img_character_12.subsurface(0, 0, 80, 90))
         self.data.append(self.img_character_1.subsurface(0, 0, 80, 90))
         self.data.append(self.img_character_2.subsurface(0, 0, 80, 90))
-        self.data.append(self.img_character_21.subsurface(0, 0, 80, 90))
-        self.data.append(self.img_character_22.subsurface(0, 0, 80, 90))
+        self.data.append(self.img_character_3.subsurface(0, 0, 80, 90))
+        self.data.append(self.img_character_4.subsurface(0, 0, 80, 90))
+        # self.data.append(self.img_character_3.subsurface(0, 0, 80, 90))
+        # self.data.append(self.img_character_2.subsurface(0, 0, 80, 90))
+        # self.data.append(self.img_character_1.subsurface(0, 0, 80, 90))
+        self.data.append(self.img_character_5.subsurface(0, 0, 80, 90))
+        self.data.append(self.img_character_6.subsurface(0, 0, 80, 90))
 
 
 class GameManager():
@@ -104,11 +107,11 @@ class GameManager():
     # Get the new duration between the time the character pop up and down the holes
     # It's in inverse ratio to the player's current level
     def get_interval_by_level(self, initial_interval):
-        new_interval = initial_interval - self.level * 0.15
+        new_interval = initial_interval - self.level * 0.2
         if new_interval > 0:
             return new_interval
         else:
-            return 0.05
+            return 0.04
 
     # Check whether the mouse click hit the character or not
     def is_character_hit(self, mouse_position, current_hole_position):
@@ -206,8 +209,8 @@ class GameManager():
                             # Start time
                             s_time = pygame.time.get_ticks()
                     elif self.in_game == True and self.game_over == False and event.button == 1:
-                        if self.is_character_hit(pygame.mouse.get_pos(), self.hole_positions[frame_num]) and num > 0 and num < 3:
-                            num = 3
+                        if self.is_character_hit(pygame.mouse.get_pos(), self.hole_positions[frame_num]) and num > 0 and num < 4:
+                            num = 4
                             is_down = False
                             interval = 0
                             self.score += 1
@@ -358,9 +361,9 @@ class GameManager():
                         num += 1
                     else:
                         num -= 1
-                    if num == 4:
+                    if num == 5:
                         interval = 0.3
-                    elif num == 3:
+                    elif num == 4:
                         num -= 1
                         is_down = True
                         self.soundEffect.playPop()
